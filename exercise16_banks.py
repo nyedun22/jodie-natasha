@@ -16,6 +16,8 @@ class Account:
     def withdraw(self, amt):
         if amt > self.__balance:
             raise InsufficientFundsException
+            #raise InsufficientFundsException('Sorry you have insufficient funds')
+            #Can run this way and just put 'pass; inside the Custom Exception Class. Would display a red error with the name of the error (InsufficientFundsException) and the message 'Sorry you have insufficient funds'
         else:
             self.__balance -= amt
             return
@@ -65,10 +67,23 @@ class SavingAccount(Account):
     def interest_balance(self):
         return self.getbalance() + self.calculate_interest()
 
-bill_account = (300, 0.05)
+#Exception:
+#initialising account for bill
+bill_account = SavingAccount(300, 0.05)
 
+#class created for the exception (this exception class as been called in the withdraw method withing the Account class)
 class InsufficientFundsException(Exception):
+    # pass
+    #below testing out the exception to see if bill withdraws more than he has.
     try:
-        bill_account.withd
+        bill_account.withdraw(500)
     except Exception:
+        #this will print the message in the program rather than stopping the program and displaying a red errror.
         print("Sorry you have insufficient funds")
+    # else:
+
+
+#use this code to test exception when it has error message in withdraw method (rather than in the try except block):
+# bill_account = SavingAccount(300, 0.05)
+# bill_account.withdraw(500)
+# print(bill_account)
